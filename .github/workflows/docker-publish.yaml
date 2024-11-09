@@ -7,8 +7,8 @@ on:
     branches: [ main ]
 
 env:
-  REGISTRY_URL: http://50-116-18-58.ip.linodeusercontent.com:5000
-  SUBMISSION_API: https://submitchallenge-ryd3bo7wyq-uc.a.run.app
+  REGISTRY_URL: registry:5000  # Replace with your registry URL
+  SUBMISSION_API: http://your-api-endpoint  # Replace with your API endpoint
 
 jobs:
   prepare:
@@ -17,7 +17,7 @@ jobs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
     steps:
       - uses: actions/checkout@v2
-      
+
       - name: Generate build matrix
         id: set-matrix
         run: |
@@ -40,7 +40,8 @@ jobs:
                       "email": config["email"]
                   })
           
-          print(f"::set-output name=matrix::{json.dumps({\"include\": builds})}")
+          matrix = {"include": builds}
+          print("::set-output name=matrix::" + json.dumps(matrix))
           '
 
   build-and-push:
