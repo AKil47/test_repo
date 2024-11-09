@@ -1,7 +1,7 @@
 __pycache__
 *.pyc
 .git
-.github
+../../repo_template/.github
 .gitignore
 .dockerignore
 README.md

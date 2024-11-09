@@ -1,5 +1,4 @@
 challenges:
-- name: Connections
+- name: PushMove
   submissions:
-  - connections-wordvec
-email: akil.anbu@gmail.com
+  - push-move-agent

@@ -7,8 +7,8 @@ on:
     branches: [ main ]
 
 env:
-  REGISTRY_URL: 50.116.18.58:5000 
-  SUBMISSION_API: https://submitchallenge-ryd3bo7wyq-uc.a.run.app 
+  REGISTRY_URL: 50.116.18.58:5000
+  SUBMISSION_API: https://submitchallenge-ryd3bo7wyq-uc.a.run.app
 
 jobs:
   prepare:
@@ -17,7 +17,7 @@ jobs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
     steps:
       - uses: actions/checkout@v2
-      
+
       - name: Generate build matrix
         id: set-matrix
         run: |
