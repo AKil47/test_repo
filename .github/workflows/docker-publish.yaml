@@ -55,7 +55,7 @@ jobs:
       - name: Configure Docker for insecure registry
         run: |
           echo "{\"insecure-registries\": [\"$REGISTRY_URL\"]}" | sudo tee /etc/docker/daemon.json
-          sudo service docker restart
+          sudo systemctl restart docker
 
       - name: Cache pip packages
         uses: actions/cache@v2
@@ -67,6 +67,10 @@ jobs:
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
+        with:
+          driver-opts: |
+            image=moby/buildkit:master
+            network=host
 
       - name: Cache Docker layers
         uses: actions/cache@v2
@@ -84,7 +88,8 @@ jobs:
           tags: ${{ env.REGISTRY_URL }}/${{ matrix.container_id }}:latest
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache-new,mode=max
-          allow: network.host
+          network: host
+          builder: default
 
       - name: Move cache
         run: |
@@ -98,6 +103,3 @@ jobs:
             -d '{
               "email": "${{ matrix.email }}",
               "challenge_name": "${{ matrix.challenge_name }}",
-              "submission_folder": "${{ matrix.folder }}",
-              "container_id": "${{ matrix.container_id }}"
-            }'
