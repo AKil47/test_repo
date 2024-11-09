@@ -12,37 +12,7 @@ env:
 
 jobs:
   prepare:
-    runs-on: ubuntu-latest
-    outputs:
-      matrix: ${{ steps.set-matrix.outputs.matrix }}
-    steps:
-      - uses: actions/checkout@v2
-
-      - name: Generate build matrix
-        id: set-matrix
-        run: |
-          python3 -c '
-          import yaml
-          import json
-          import uuid
-          
-          with open("config.yaml") as f:
-              config = yaml.safe_load(f)
-          
-          builds = []
-          for challenge in config["challenges"]:
-              for submission in challenge["submissions"]:
-                  container_id = str(uuid.uuid4())
-                  builds.append({
-                      "folder": submission,
-                      "challenge_name": challenge["name"],
-                      "container_id": container_id,
-                      "email": config["email"]
-                  })
-          
-          matrix = {"include": builds}
-          print("::set-output name=matrix::" + json.dumps(matrix))
-          '
+    # ... (previous prepare job remains the same)
 
   build-and-push:
     needs: prepare
@@ -55,7 +25,7 @@ jobs:
       # Configure Docker for insecure registry
       - name: Configure Docker for insecure registry
         run: |
-          echo '{"insecure-registries": ["${REGISTRY_URL}"]}' | sudo tee /etc/docker/daemon.json
+          echo "{\"insecure-registries\": [\"$REGISTRY_URL\"]}" | sudo tee /etc/docker/daemon.json
           sudo service docker restart
 
       # Cache pip packages
