@@ -7,7 +7,7 @@ on:
     branches: [ main ]
 
 env:
-  REGISTRY_URL: http://50-116-18-58.ip.linodeusercontent.com:5000
+  REGISTRY_URL: 50.116.18.58:5000 
   SUBMISSION_API: https://submitchallenge-ryd3bo7wyq-uc.a.run.app 
 
 jobs:
