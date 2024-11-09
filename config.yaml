@@ -1,6 +1,5 @@
 challenges:
-- name: Challenge A
+- name: Connections
   submissions:
-  - WordVecAgent
-  - asdfasdf
+  - connections-wordvec
 email: akil.anbu@gmail.com
