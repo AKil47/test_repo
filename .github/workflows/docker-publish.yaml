@@ -7,8 +7,8 @@ on:
     branches: [ main ]
 
 env:
-  REGISTRY_URL: registry:5000  # Replace with your registry URL
-  SUBMISSION_API: http://your-api-endpoint  # Replace with your API endpoint
+  REGISTRY_URL: http://50-116-18-58.ip.linodeusercontent.com:5000
+  SUBMISSION_API: https://submitchallenge-ryd3bo7wyq-uc.a.run.app 
 
 jobs:
   prepare:
