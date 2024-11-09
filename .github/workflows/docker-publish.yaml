@@ -86,7 +86,7 @@ jobs:
             -H "Content-Type: application/json" \
             -d '{
               "email": "${{ matrix.email }}",
-              "challenge_name": "${{ matrix.challenge_name }}",
-              "submission_folder": "${{ matrix.folder }}",
+              "challengeName": "${{ matrix.challenge_name }}",
+              "submissionName": "${{ matrix.folder }}",
               "container_id": "${{ matrix.container_id }}"
             }'
