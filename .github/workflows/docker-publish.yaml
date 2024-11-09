@@ -44,7 +44,7 @@ jobs:
           print("::set-output name=matrix::" + json.dumps(matrix))
           '
 
-  build-and-push:
+ build-and-push:
     needs: prepare
     runs-on: ubuntu-latest
     strategy:
@@ -55,9 +55,8 @@ jobs:
       # Configure Docker for insecure registry
       - name: Configure Docker for insecure registry
         run: |
-          echo '{"insecure-registries": ["${REGISTRY_URL}"]}' | sudo tee /etc/docker/daemon.json
+          echo "{\"insecure-registries\": [\"$REGISTRY_URL\"]}" | sudo tee /etc/docker/daemon.json
           sudo service docker restart
-
       # Cache pip packages
       - name: Cache pip packages
         uses: actions/cache@v2
@@ -103,4 +102,3 @@ jobs:
               "submissionName": "${{ matrix.folder }}",
               "container_id": "${{ matrix.container_id }}"
             }'
-
